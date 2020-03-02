@@ -39,36 +39,52 @@ const MORSE_TABLE = {
 
 
 function decode(expr) {
-    // write your solution here
-    let outputStr = '';
+    let outputStr = ''
 
-    for (let i = 0; i < expr.length; i += 10) {
+    for (let i = 0; i < expr.length; i = i + 10) {
         let result = '';
-        // output separate words of every string
-        let words = expr.substr(i, 10);
 
-        // decode every word in string 
-        if (words !== '**********') {
-            for (let j = 0; j < words.length; j += 2) {
-                let number = words.substr(j, 2);
-                if (number === '10') {
-                    result += '.';
-                } else if (number === '11') {
-                    result += '-';
-                } else {
-                    result
+        let letters = expr.substr(i,10)
+
+        if (letters !== '**********') {
+            for (let j = 0; j < letters.length; j = j + 2) {
+                let letter = letters.substr(j,2)
+                // if (letter === '10') {
+                //     result += '.'
+                // }
+                // else if (letter === '11') {
+                //     result += '-'
+                // }
+                // else {
+                //     result
+                // }
+                switch (letter) {
+                    case '10':
+                        result += '.';
+                        break
+                    case '11':
+                        result += '-';
+                        break
+                    default:
+                        result;
+                        break
                 }
+
+
             }
             outputStr += MORSE_TABLE[result];
+
         } else {
-            // if word === '**********', we make space in output string
-            outputStr += ' ';
+            outputStr += ' '
         }
     }
 
+
     return outputStr;
+
 }
 
 module.exports = {
     decode
 }
+
